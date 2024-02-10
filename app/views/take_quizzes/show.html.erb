@@ -1,24 +1,48 @@
 <%# app/views/take_quizzes/show.html.erb %>
-<h1>Resultados del quiz <%= @quiz.title %></h1>
+<% if @take_quiz.completed? %>
+  <h1>Resultados del quiz <%= @take_quiz.quiz.title %></h1>
 
-<p>
-  <strong>Estudiante:</strong>
-  <%= @take_quiz.student.name %>
-</p>
+  <p>
+    <strong>Estudiante:</strong>
+    <%= @take_quiz.student.name %>
+  </p>
 
-<p>
-  <strong>Puntuación:</strong>
-  <%= @take_quiz.result %>
-</p>
+  <p>
+    <strong>Puntuación:</strong>
+    <%# placeholder para llamar el score del estudiante %>
+    <%= @take_quiz.calculate_score %>
+  </p>
 
-<% @quiz.questions.each_with_index do |question, index| %>
-  <div class="question">
-    <p><%= question.content %></p>
-    <p>Respuesta seleccionada:
-      <%= @take_quiz.responses.find { |r| r.question_id == question.id }&.content %>
-    </p>
-    <p>Respuesta correcta: <%= question.answers.find(&:correct?).content %></p>
-  </div>
+  <% @take_quiz.quiz.questions.each_with_index do |question, index| %>
+    <div class="question">
+      <p><%= question.content %></p>
+      <p>Respuesta seleccionada:
+        <%# This assumes you have a method to get the selected answer's content %>
+        <%= @take_quiz.selected_answer_for(question)&.content %>
+      </p>
+      <p>Respuesta correcta: <%= question.answers.find(&:correct?).content %></p>
+    </div>
+  <% end %>
+
+  <%= link_to 'Volver a los quizzes', quizzes_path %>
+<% else %>
+  <h1><%= @take_quiz.quiz.title %></h1>
+  <p><strong>Descripción:</strong> <%= @take_quiz.quiz.description %></p>
+
+  <% if @take_quiz.started? %>
+    <% if @current_question %>
+      <h2><%= @current_question.content %></h2>
+      <%= form_with url: answer_take_quiz_path(@take_quiz), method: :post do |form| %>
+        <% @current_question.answers.each do |answer| %>
+          <%= form.radio_button :answer_id, answer.id %>
+          <%= form.label :answer_id, answer.content, value: answer.id %><br>
+        <% end %>
+        <%= form.submit "Siguiente pregunta" %>
+      <% end %>
+    <% else %>
+      <p>El quiz ha finalizado. Por favor, espera los resultados.</p>
+    <% end %>
+  <% else %>
+    <%= link_to 'Empezar Examen', start_take_quiz_path(@take_quiz), method: :post, class: 'btn btn-primary' %>
+  <% end %>
 <% end %>
-
-<%= link_to 'Volver a los resultados', quizzes_path %>
