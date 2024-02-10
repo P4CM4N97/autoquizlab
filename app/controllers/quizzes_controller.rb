@@ -13,18 +13,22 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new(quiz_params)
     @quiz.teacher = current_teacher
     if @quiz.save
-      @generated_content = @quiz.content
-      (@quiz.number_of_questions - 1).times do | number |
-        question = Question.new(quiz_id: @quiz.id, question: @generated_content.split("\n").split("")[number + 1][0])
-        3.times do | option |
-          question.answers << @generated_content.split("\n").split("")[number + 1][option + 1]
+      if @quiz.save
+        @generated_content = @quiz.content
+        @generated = @generated_content.split("\n")
+        @generated.each do |line|
+          if line.start_with?(/(Pregunta||\d{1,5})/)
+            question = Question.new
+            question.question = line.strip
+          elsif line.start_with?("a") || line.start_with?("b") || line.start_with?("c")
+            question.answers << line
+          elsif line.start_with?("R:")
+            question.answer = line
+          end
+          # question.save if question+
         end
-        question.save
       end
-      redirect_to @quiz, notice: 'El examen ha sido creado de manera exitosa.'
-    else
-      render :new
-    end
+    end        
   end
 
   def show
