@@ -1,36 +1,55 @@
-<div class="grid">
-  <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
-  </svg>
-  <div class="blur"></div>
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+
+<div class="container mt-4">
+  <div class="grid">
+    <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
+    </svg>
+    <div class="blur"></div>
+  </div>
+
+  <h1>Crea un Nuevo Estudiante</h1>
+  <hr class="sin-color">
+  <hr class="sin-color">
+
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-body wow-bg" id="formBg">
+          <%= form_with model: [@institution, @student] do |f| %>
+            <div class="form-inputs text-white">
+              <div class="mb-3">
+                <%= f.label :email, 'Email', class: 'form-label' %>
+                <%= f.text_field :email, class: 'form-control' %>
+              </div>
+
+              <div class="mb-3">
+                <%= f.label :password, 'Contraseña', class: 'form-label' %>
+                <%= f.password_field :password, class: 'form-control' %>
+              </div>
+
+              <div class="mb-3">
+                <%= f.label :name, 'Nombre', class: 'form-label' %>
+                <%= f.text_field :name, class: 'form-control' %>
+              </div>
+            </div>
 </div>
+      </div>
+        <hr class="sin-color">
+  <hr class="sin-color">
 
+            <div class="form-actions text-center">
+              <button type="submit" class="btn btn-outline-light btn-md">Registrar Estudiante</button>
+            </div>
+          <% end %>
 
-<h1>Crea un Nuevo Estudiante</h1>
-<hr class="sin-color">
-<hr class="sin-color">
-
-<div class="card" >
-  <div class="card-body wow-bg" id="formBg" >
-
-<%= form_with model: [@institution, @student] do |f| %>
-<div class="form-inputs" style="color:white;">
-    <%= f.label :Email %>
-    <%= f.text_field :email %>
-
-    <%= f.label :Contraseña %>
-    <%= f.text_field :password %>
-
-    <%= f.label :Nombre %>
-    <%= f.text_field :name %>
-</div>
-</div>
-</div>
-
- <div class="form-actions">
-    <button>  <%= f.submit "Registrar estudiante", class: "btn btn-outline-light btn-md" %> </button>
     </div>
-<% end %>
- <hr class="sin-color">
-    <hr class="sin-color">
-    <hr class="sin-color">
-    <hr class="sin-color">
+  </div>
+
+  <hr class="sin-color mt-4">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+</div>

@@ -1,107 +1,102 @@
 <%# app/views/teachers/show.html.erb %>
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
 
+<div class="container mt-4">
+  <div class="grid">
+    <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
+      <!-- Tu contenido SVG aquí -->
+    </svg>
+    <div class="blur"></div>
+  </div>
 
+  <h1 class="mt-4">Profesor: <%= @teacher.name %></h1>
 
+  <p>
+    <strong>Correo Electrónico:</strong> <%= @teacher.email %>
+  </p>
+  <hr class="sin-color mt-4">
 
+  <div class="card mt-4">
+    <div class="card-body wow-bg" id="formBg">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 style="color:white;">Mi Materia:</h5>
+            <h5 style="color:white;"> <%= @teacher.subject.name %> </h5>
+          </div>
 
-
-<div class="grid">
-  <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
-    <!-- Tu contenido SVG aquí -->
-  </svg>
-  <div class="blur"></div>
-</div>
-
-<h1>Profesor: <%= @teacher.name %></h1>
-
-<p>
-  <strong>Correo Electrónico:</strong>
-  <%= @teacher.email %>
-</p>
-<hr class="sin-color">
-
-<div class="card">
-  <div class="card-body wow-bg" id="formBg">
-    <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <h5 style="color:white;">Mi Materia:</h5>
-         <h5 style="color:white;"> <%= @teacher.subject.name %> </h5>
+          <div class="col-md-6">
+            <h5 style="color:white;">Examenes</h5>
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Crear Examen</th>
+                  <th scope="col"><%= link_to '+', new_teacher_quiz_path(@teacher), class: "btn btn-outline-light btn-md" %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Puedes añadir contenido aquí si es necesario -->
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <hr class="sin-color mt-4">
 
-        <div class="col-6">
-          <h5 style="color:white;">Examenes</h5>
-          <table class="table-dark">
+  <div class="card mt-4">
+    <div class="card-body wow-bg" id="formBg">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Alumnos</h4>
+          <table class="table table-dark">
             <thead>
               <tr>
-                <th scope="col">Crear Examen</th>
-                <th scope="col"><%= link_to '+', new_teacher_quiz_path(@teacher), class: "btn btn-outline-light btn-md" %></th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
+              <% @students.each do |student|  %>
+                <tr>
+                  <td scope="row"><%= student.name %></td>
+                  <td scope="row"><%= student.email %></td>
+                  <td scope="row">
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                      <%= link_to 'Ver', student_path(student), class:"btn btn-outline-light btn-md" %>
+                      <%= link_to 'Editar', edit_student_path(student), class: "btn btn-outline-light btn-md"%>
+                      <%= link_to 'Eliminar', student_path(student), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-outline-light btn-md" %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
+  <hr class="sin-color mt-4">
 </div>
-<hr class="sin-color">
-<hr class="sin-color">
 
-<div class="card">
-  <div class="card-body wow-bg" id="formBg">
-    <div class="row">
-      <div class="col-6">
-        <h4>Alumnos</h4>
-        <table class="table-dark">
-          <thead>
-            <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Correo</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @students.each do |student|  %>
-              <tr>
-                <td scope="row"><%= student.name %></td>
-                <td scope="row"><%= student.email %></td>
-                <td scope="row"><div class="btn-group" role="group" aria-label="Acciones">
-          <%= link_to 'Ver', student_path(student), class:"btn btn-outline-light btn-md" %>
-          <%= link_to 'Editar', edit_student_path(student), class: "btn btn-outline-light btn-md"%>
-          <%= link_to 'Eliminar', student_path(student), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-outline-light btn-md" %>
-        </div>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-<hr class="sin-color">
-<hr class="sin-color">
-<%#= link_to 'Editar', edit_teacher_path(@teacher) %>
-<%#= link_to 'Volver', teachers_path %>
+<%#= link_to 'Editar', edit_teacher_path(@teacher), class: 'btn btn-outline-dark btn-lg' %>
+<%#= link_to 'Volver', teachers_path, class: 'btn btn-outline-dark btn-lg mt-2' %>

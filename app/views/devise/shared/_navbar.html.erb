@@ -24,7 +24,7 @@
           <% if student_signed_in? %>
             <li class="nav-item">
               <%= link_to "Cerrar Sesion", destroy_student_session_path, class: "nav-link", data: {turbo_method: :delete} %>
-               <p class="text-primary nav-link"><%= current_student.name %></p>
+               <p class="nav-link" style="color:#2DA7A7">Estudiante: <%= current_student.name %></p>
 
             </li>
             <li class="nav-item">
@@ -33,7 +33,7 @@
           <% elsif teacher_signed_in? %>
             <li class="nav-item">
                 <%= link_to "Cerrar Sesion", destroy_teacher_session_path, class: "nav-link", data: {turbo_method: :delete} %>
-               <p class="text-primary nav-link"><%= current_teacher.name %></p>
+               <p class="nav-link" style="color:#2DA7A7">Maestro: <%= current_teacher.name %></p>
 
 
             </li>
@@ -43,7 +43,7 @@
           <% elsif institution_signed_in? %>
             <li class="nav-item">
               <%= link_to "Cerrar Sesion", destroy_institution_session_path, class: "nav-link", data: {turbo_method: :delete} %>
-                <p class="text-primary nav-link"><%= current_institution.name %></p>
+                <p class="nav-link" style="color:#2DA7A7" >Escuela: <%= current_institution.name %></p>
 
             </li>
             <li class="nav-item">

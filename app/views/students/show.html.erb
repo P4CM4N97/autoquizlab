@@ -1,96 +1,106 @@
-<%# app/views/institutions/show.html.erb %>
-<h1>Institución: <%= @student.name %></h1>
-<div class="grid">
-  <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
-    <!-- Tu contenido SVG aquí -->
-  </svg>
-  <div class="blur"></div>
-</div>
-
-<div class="card">
-            <div class="card-body wow-bg" id="formBg">
-
-<p>
-  <strong>Escuela:</strong>
-  <%= @institution.name %>
-</p>
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
 <hr class="sin-color">
 
-<p>
-  <strong>Correo Electrónico:</strong>
-  <%= @student.email %>
-</p>
-</div>
-</div>
-<hr class="sin-color">
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Estudiante: <%= @student.name %></h1>
 
-<div class="card-body wow-bg" id="formBg" >
+  <div class="grid">
+    <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
+      <!-- Tu contenido SVG aquí -->
+    </svg>
+    <div class="blur"></div>
+  </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-4">
-      <h4>Materias</h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nombre</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @subjects.each do |subject|  %>
-            <tr>
-              <td scope="row"><%= subject.name %></td>
-              <td></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-4">
-      <h4>Profesores</h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @teachers.each do |teacher|  %>
-            <tr>
-              <th scope="row"><%= teacher.name %></th>
-              <td scope="row"><%= teacher.email %></td>
-              <td></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-4">
-      <h4>Exámenes</h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Materia</th>
-            <th scope="col">Titulo del Examen</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @students.each do |student|  %>
-            <tr>
-              <th scope="row"><%= subject.name %></th>
-              <td scope="row"><%= quiz.title %></td>
-              <td></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <div class="card mb-4" >
+    <div class="card-body wow-bg" id="formBg">
+      <p style="color:white;" class="text-center">
+        <strong>Escuela:</strong>
+        <%= @student.institution.name %>
+      </p>
+      <hr class="sin-color">
+      <p style="color:white;" class="text-center">
+        <strong>Correo Electrónico:</strong>
+        <%= @student.email %>
+      </p>
     </div>
   </div>
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+
+  <div class="card wow-bg mb-5">
+    <div class="card-body" id="formBg">
+
+      <div class="row" >
+        <div class="col-md-4" >
+          <h4 style="color:white;" class="text-center">Materias</h4>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Nombre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @student.subjects.each do |subject|  %>
+                <tr>
+                  <td class="text-start"><%= subject.name %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-4">
+          <h4 style="color:white;" class="text-center">Profesores</h4>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Nombre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%# @teachers.each do |teacher|  %>
+                <tr>
+                  <td class="text-center"><%#= teacher.name %></td>
+                </tr>
+              <%# end %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-4">
+          <h4 style="color:white;" class="text-center">Exámenes</h4>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th class="text-end" scope="col">Materia</th>
+                <th class="text-end" scope="col">Titulo del Examen</th>
+                <th class="text-end" scope="col">Calificación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%# @students.each do |student|  %>
+                <tr>
+                  <td class="text-end"><%#= subject.name %></td>
+                  <td class="text-end"><%#= quiz.title %></td>
+                  <td class="text-end"></td>
+                </tr>
+              <%# end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+
+  <div class="text-center">
+    <%#= link_to 'Editar', edit_student_path(@institution), class: 'btn btn-outline-primary btn-md mr-3' %>
+    <%#= link_to 'Volver', students_path, class: 'btn btn-outline-primary btn-md' %>
+  </div>
 </div>
-</div>
-
-
-
-<%= link_to 'Editar', edit_student_path(@institution), class: 'button first' %>
-<%= link_to 'Volver', students_path, class: 'button first' %>
