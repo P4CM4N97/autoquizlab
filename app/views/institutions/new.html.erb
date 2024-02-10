@@ -1,54 +1,66 @@
-
 <%# app/views/institutions/new.html.erb %>
-<h1>Nueva Institución</h1>
 
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
 
-<div class="grid">
-  <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
-    <!-- Tu contenido SVG aquí -->
-  </svg>
-  <div class="blur"></div>
-</div>
+<div class="container mt-4">
+  <h1>Nueva Institución</h1>
 
+  <div class="card mt-4">
+    <div class="card-body wow-bg" id="formBg">
+      <div class="grid">
+        <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
+          <!-- Tu contenido SVG aquí -->
+        </svg>
+        <div class="blur"></div>
+      </div>
 
-<%= form_with(model: @institution, local: true) do |form| %>
-  <% if @institution.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@institution.errors.count, "error") %> No se pudo guardar la institución </h2>
+      <%= form_with(model: @institution, local: true, html: { class: 'form' }) do |form| %>
+        <% if @institution.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@institution.errors.count, "error") %> No se pudo guardar la institución </h2>
 
-      <ul>
-        <% @institution.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+            <ul>
+              <% @institution.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="mb-3" style="color:white;">
+          <%= form.label :name, 'Nombre', class: 'form-label' %>
+          <%= form.text_field :name, id: :institution_name, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3" style="color:white;">
+          <%= form.label :phone_number, 'Número de Teléfono', class: 'form-label' %>
+          <%= form.telephone_field :phone_number, id: :institution_phone_number, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3" style="color:white;">
+          <%= form.label :address, 'Dirección', class: 'form-label' %>
+          <%= form.text_field :address, id: :institution_address, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3" style="color:white;">
+          <%= form.label :email, 'Correo Electrónico', class: 'form-label' %>
+          <%= form.email_field :email, id: :institution_email, class: 'form-control' %>
+        </div>
+      </div>
     </div>
-  <% end %>
+      <hr class="sin-color">
+  <hr class="sin-color">
 
-  <div class="field">
-    <%= form.label :name, 'Nombre' %>
-    <%= form.text_field :name, id: :institution_name %>
-  </div>
+        <div class="form-actions">
+          <%= form.submit 'Guardar', class:"btn btn-outline-light btn-md" %>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :phone_number, 'Número de Teléfono' %>
-    <%= form.telephone_field :phone_number, id: :institution_phone_number %>
-  </div>
 
-  <div class="field">
-    <%= form.label :address, 'Dirección' %>
-    <%= form.text_field :address, id: :institution_address %>
-  </div>
 
-  <div class="field">
-    <%= form.label :email, 'Correo Electrónico' %>
-    <%= form.email_field :email, id: :institution_email %>
-  </div>
-
-  <div class="actions">
-   <%= form.submit 'Guardar', class: 'button first' %>
-  </div>
-<% end %>
-  </div>
-    </div>
-
-<%= link_to 'Volver', institutions_path, class: "btn btn-outline-dark btn-md" %>
+  <%= link_to 'Volver', institutions_path, class: 'btn btn-outline-light btn-md mt-3' %>
+</div>

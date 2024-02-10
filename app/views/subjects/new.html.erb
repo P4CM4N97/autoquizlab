@@ -4,63 +4,57 @@
 <hr class="sin-color">
 <hr class="sin-color">
 
-<h1>Crea una Nueva Materia</h1>
-<hr class="sin-color">
-<hr class="sin-color">
 
-<div class="grid">
-  <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
-    <!-- Tu contenido SVG aquí -->
-  </svg>
-  <div class="blur"></div>
-</div>
+<div class="container mt-4">
+  <hr class="sin-color">
+  <h1 class="mb-4">Crea una Nueva Materia</h1>
+  <hr class="sin-color">
 
-<div class="card" >
-  <div class="card-body wow-bg" id="formBg" >
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-body wow-bg" id="formBg">
+          <%= form_with(model: [@institution, @subject], local: true) do |form| %>
+            <% if @subject.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@subject.errors.count, "error") %> no se pudo guardar la materia</h2>
+                <ul>
+                  <% @subject.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
 
+            <div class="form-inputs">
+              <div class="mb-3" style="color:white;">
+                <%= form.label :name, 'Materia', class: 'form-label' %>
+                <%= form.text_field :name, class: 'form-control' %>
+              </div>
 
-<%= form_with(model: [@institution, @subject], local: true) do |form| %>
-  <% if @subject.errors.any? %>
-        <div class="form-inputs">
+              <div class="mb-3" style="color:white;">
+                <%= form.label :teacher, 'Profesor', class: 'form-label' %>
+                <%= form.select :teacher_id, options_for_select(@institution.teachers.map { |teacher| [teacher.name, teacher.id] }), {}, class: 'form-select' %>
+              </div>
+            </div>
 
-    <div id="error_explanation">
-      <h2><%= pluralize(@subject.errors.count, "error") %> no se pudo guardar la materia</h2>
+            <hr class="sin-color">
+          </div>
+            </div>
+            <hr class="sin-color">
 
-      <ul>
-        <% @subject.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+            <div class="form-actions text-center">
+              <button type="submit" class="btn btn-outline-light btn-md">Guardar</button>
+            </div>
+          <% end %>
+
+      <hr class="sin-color mt-4">
+      <hr class="sin-color mt-4">
+      <hr class="sin-color mt-4">
+
+      <%= link_to 'Regresar a Escuelas', institutions_path, class: "btn btn-outline-light btn-md" %>
     </div>
-  <% end %>
-
-  <div class="field" style="color:white;">
-    <%= form.label :name, 'Materia' %>
-    <%= form.text_field :name %>
   </div>
-<hr class="sin-color">
 
-    <div class="field" style="color:white;">
-    <%= form.label :teacher, 'Profesor' %>
-    <%= form.select :teacher_id, options_for_select(@institution.teachers.map {|teacher| [teacher.name, teacher.id]}) %>
-  </div>
- </div>
-</div>
-</div>
-<hr class="sin-color">
-
-<div class="form-actions">
- <button> <%= form.submit 'Guardar', class: "btn btn-outline-light btn-md" %> </button>
-</div>
-
-<% end %>
-
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-
-
-
- <%= link_to 'Back to Institutions', institutions_path, class: "btn btn-outline-light btn-md" %>
-</div>
+  <hr class="sin-color mt-4">
 </div>

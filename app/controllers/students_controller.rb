@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_institution, only: [:show, :edit, :update, :destroy]
+  before_action :set_institution, only: [:edit, :update, :destroy]
 
   def index
     @students = Student.all
@@ -8,8 +8,8 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = current_student
-    @institution = Institution.find(current_student.institution_id)
+    @student = Student.find(params[:id])
+    # @institution = Institution.find(current_student.institution_id)
   end
 
   def new

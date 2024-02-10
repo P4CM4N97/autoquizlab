@@ -1,116 +1,112 @@
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
-<hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
 
-<h1><%= @institution.name %></h1>
-<div class="grid">
-  <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
-    <!-- Tu contenido SVG aquí -->
-  </svg>
-  <div class="blur"></div>
-</div>
 
-<div class="card">
-  <div class="card-body wow-bg" id="formBg">
-    <p style="color:white;">
-      <strong>Número de Teléfono:</strong>
-      <%= @institution.phone_number %>
-    </p>
-    <hr class="sin-color">
-
-    <p style="color:white;">
-      <strong>Dirección:</strong>
-      <%= @institution.address %>
-    </p>
-    <hr class="sin-color">
-
-    <p style="color:white;">
-      <strong>Correo Electrónico:</strong>
-      <%= @institution.email %>
-    </p>
+<div class="container mt-5">
+  <div class="grid">
+    <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
+    </svg>
+    <div class="blur"></div>
   </div>
-</div>
-<hr class="sin-color">
-<hr class="sin-color">
 
-<div class="container">
-  <div class="row">
-    <div class="col-2">
-      <div class="card-body wow-bg" id="formBg">
-        <h4>Materias</h4>
-        <table class="table-dark">
-          <thead>
-            <tr>
-              <th scope="col">Nombre</th>
-              <th class="text-end" scope="col"><%= link_to '+', new_institution_subject_path(@institution), class: "btn btn-outline-dark btn-md" %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @subjects.each do |subject|  %>
-              <tr>
-                <td class="text-start" scope="row"><%= subject.name %></td>
-                <td></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <div class="card mb-5">
+    <div class="card-body wow-bg" id="formBg" style="color:white;">
+      <h1 class="text-center mb-4"><%= @institution.name %></h1>
 
-    <div class="col-5">
-      <div class="card-body wow-bg" id="formBg">
-        <h4>Profesores</h4>
-        <table class="table-dark" class=".p-1">
-          <thead>
-            <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Email</th>
-              <th scope="col"><%= link_to '+', new_institution_teacher_path(@institution), class: "btn btn-outline-dark btn-md" %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @teachers.each do |teacher|  %>
-              <tr>
-                <th class="text-start" class="text-center" scope="row"><%= teacher.name %></th>
-                <td class="text-end" scope="row"><%= teacher.email %></td>
-                <td></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body wow-bg" id="formBg">
+              <h4 class="text-center mb-4">Materias</h4>
+              <div class="text-center mb-4">
+                <%= link_to '+', new_institution_subject_path(@institution), class: "btn btn-outline-light btn-md" %>
+              </div>
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @subjects.each do |subject|  %>
+                    <tr>
+                      <td class="text-start" scope="row"><%= subject.name %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-    <div class="col-5">
-      <div class="card-body wow-bg" id="formBg">
-        <h4>Alumnos</h4>
-        <table class="table-dark">
-          <thead>
-            <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Correo</th>
-              <th scope="col"><%= link_to '+', new_institution_student_path(@institution), class: "btn btn-outline-dark btn-md" %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @students.each do |student|  %>
-              <tr>
-                <th class="text-start" scope="row"><%= student.name %></th>
-                <td class="text-end" scope="row"><%= student.email %></td>
-                <td></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body wow-bg" id="formBg">
+              <h4 class="text-center mb-4">Profesores</h4>
+              <div class="text-center mb-4">
+                <%= link_to '+', new_institution_teacher_path(@institution), class: "btn btn-outline-light btn-md" %>
+              </div>
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th class="text-center" scope="col">Email</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @teachers.each do |teacher|  %>
+                    <tr>
+                      <td class="text-start" scope="row"><%= teacher.name %></td>
+                      <td class="text-end" scope="row"><%= teacher.email %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body wow-bg" id="formBg">
+              <h4 class="text-center mb-4">Alumnos</h4>
+              <div class="text-center mb-4">
+                <th class="text-end" scope="col"><%= link_to '+', new_institution_student_path(@institution), class: "btn btn-outline-light btn-md" %></th>
+              </div>
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th class="text-center" scope="col">Correo</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @students.each do |student|  %>
+                    <tr>
+                      <td class="text-start" scope="row"><%= student.name %></td>
+                      <td class="text-end" scope="row"><%= student.email %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<%= link_to 'Volver', institutions_path, class: "btn btn-outline-dark btn-lg" %>
+  <%= link_to 'Volver', institutions_path, class: "btn btn-outline-light btn-lg mt-4" %>
