@@ -58,16 +58,6 @@ background: linear-gradient(0deg, rgba(18,18,18,1) 13%, rgba(18,18,18,1) 29%, rg
   box-sizing: border-box;
 }
 
-#signup-section,
-#login-section {
-  /* ... Estilos específicos para cada formulario ... */
-}
-
-/* ... Otros estilos ... */
-
-/* application.scss */
-
-/* ... Otros estilos ... */
 
 body {
   display: flex;
@@ -89,10 +79,3 @@ body {
   margin-bottom: 20px; /* Ajusta según la separación deseada entre formularios */
   box-sizing: border-box;
 }
-
-#signup-section,
-#login-section {
-  /* ... Estilos específicos para cada formulario ... */
-}
-
-/* ... Otros estilos ... */
