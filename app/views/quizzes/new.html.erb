@@ -22,30 +22,34 @@
 
   <div class="card mt-4">
     <div class="card-body wow-bg" id="formBg">
+  <hr class="sin-color">
+
       <%= form_with(model: @quiz, local: true, html: { class: 'form' }) do |form| %>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <%= form.label :student_age, 'Edad de los alumnos:', class: 'form-label text-white' %>
+          <%= form.select :student_age, options_for_select((6..21), @quiz.student_age), include_blank: true, class: 'form-select' %>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <%= form.label :number_of_questions, 'Número de preguntas:', class: 'form-label text-white' %>
+          <%= form.select :number_of_questions, options_for_select((1..20).to_a, @quiz.number_of_questions), include_blank: true, class: 'form-select' %>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <%= form.label :exam_level, 'Nivel del examen:', class: 'form-label text-white' %>
+          <%= form.select :exam_level, options_for_select(['Principiante', 'Intermedio', 'Avanzado'], @quiz.exam_level), include_blank: true, class: 'form-select' %>
+        </div>
+      </div>
+
         <div class="mb-3">
           <%= form.label :subject_name, 'Nombre de materia:', class: 'form-label text-white' %>
           <%= form.text_field :subject_name, class: 'form-control' %>
         </div>
 
         <div class="mb-3">
-          <%= form.label :student_age, 'Edad de los alumnos:', class: 'form-label text-white' %>
-          <%= form.select :student_age, options_for_select((6..21), @quiz.student_age), include_blank: true, class: 'form-select' %>
-        </div>
-
-        <div class="mb-3">
           <%= form.label :topic, 'Tema:', class: 'form-label text-white' %>
           <%= form.text_field :topic, class: 'form-control' %>
-        </div>
-
-        <div class="mb-3">
-          <%= form.label :number_of_questions, 'Número de preguntas:', class: 'form-label text-white' %>
-          <%= form.select :number_of_questions, options_for_select((1..20).to_a, @quiz.number_of_questions), include_blank: true, class: 'form-select' %>
-        </div>
-
-        <div class="mb-3">
-          <%= form.label :exam_level, 'Nivel del examen:', class: 'form-label text-white' %>
-          <%= form.select :exam_level, options_for_select(['Principiante', 'Intermedio', 'Avanzado'], @quiz.exam_level), include_blank: true, class: 'form-select' %>
         </div>
 
         <div class="mb-3">
