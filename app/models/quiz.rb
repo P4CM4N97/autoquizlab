@@ -1,5 +1,7 @@
 class Quiz < ApplicationRecord
   belongs_to :teacher
+  has_many :questions
+
   def content
     client = OpenAI::Client.new
     chaptgpt_response = client.chat(parameters: {
