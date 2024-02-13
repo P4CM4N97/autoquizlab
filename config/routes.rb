@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :students
-  devise_for :teachers, controllers: {sessions: 'teachers'}
+  devise_for :teachers, controllers: {sessions: 'teachers/sessions'}
   devise_for :institutions
 
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :take_quizzes, only: [:new, :create]
     end
 
-  resources :teachers, only: [:new, :create, :show] do
+  resources :teachers, only: [:show] do
     resources :quizzes
   end
 
