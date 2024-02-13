@@ -1,15 +1,15 @@
 class TeachersController < ApplicationController
   before_action :authenticate_teacher!
   # before_action :set_institution, only: [:new, :create]
-  # before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
 
   def index
     @teachers = Teacher.all # or scope to institution if necessary
   end
 
   def show
-    # @subjects = @teacher.subject
-    # @students = Student.where(institution_id: @teacher.institution_id)
+    @subjects = @teacher.subject
+    @students = Student.where(institution_id: @teacher.institution_id)
   end
 
   def new
