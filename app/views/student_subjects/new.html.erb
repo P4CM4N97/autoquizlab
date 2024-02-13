@@ -1,13 +1,23 @@
 <h1> Asignar Materias </h1>
 
-<%= form_with model: [@student, @studentsubject] do |f| %>
+ <div class="card mt-4">
+    <div class="card-body wow-bg" id="formBg">
+      <div class="grid">
+        <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
+          <!-- Tu contenido SVG aquí -->
+        </svg>
+        <div class="blur"></div>
+      </div>
+
+<%= form_with(model: [@student, @studentsubject]) do |f| %>
 <div class="form-inputs">
 
     <%= f.label :Materia %>
     <%= f.select :subject_id, options_for_select(@subjects.map {|subject| [subject.name, subject.id]}) %>
-
-
+ </div>
+    </div>
+ 
  <div class="form-actions">
-    <button>  <%= f.submit "Asignar Materia" %> </button>
+    <%= f.submit "Asignar Materia", class:"btn btn-outline-light btn-md" %>
     </div>
 <% end %>

@@ -62,6 +62,7 @@
                   <tr>
                     <th scope="col">Nombre</th>
                     <th class="text-center" scope="col">Email</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -69,8 +70,11 @@
                     <tr>
                       <td class="text-start" scope="row"><%= teacher.name %></td>
                       <td class="text-end" scope="row"><%= teacher.email %></td>
-                      <td class="text-end" scope="row"><%= link_to "Eliminar", teacher_path(teacher), data: {turbo_method: :delete, turbo_confirm: "Está seguro/a"}%></td>
-                    </tr>
+                      <td class="text-end" scope="row">
+                        <%= link_to  teacher_path(teacher), data: {turbo_method: :delete, turbo_confirm: "Está seguro/a"} do %>
+                         <i class="fa-solid fa-trash-can fa-xl" style="color: #34dcdf;"></i>
+                        <% end %>
+                      </td>
                   <% end %>
                 </tbody>
               </table>
@@ -90,6 +94,7 @@
                   <tr>
                     <th scope="col">Nombre</th>
                     <th class="text-center" scope="col">Correo</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -97,7 +102,9 @@
                     <tr>
                       <td class="text-start" scope="row"><%= student.name %></td>
                       <td class="text-end" scope="row"><%= student.email %></td>
-                      <td class="text-end" scope="row"><%= link_to "Eliminar", student_path(student), data: {turbo_method: :delete, turbo_confirm: "Está seguro/a"}%></td>
+                      <td class="text-end" scope="row"><%= link_to student_path(student), data: {turbo_method: :delete, turbo_confirm: "Está seguro/a"} do %>
+                        <i class="fa-solid fa-trash-can fa-xl" style="color: #34dcdf;"></i></td>
+                        <% end %>
                     </tr>
                   <% end %>
                 </tbody>

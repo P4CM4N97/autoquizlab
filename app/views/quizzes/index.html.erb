@@ -9,9 +9,8 @@
     <% @quizzes.each do |quiz| %>
       <li>
         <%= link_to quiz.title, quiz %>
-        - <%= link_to 'Eliminar', quiz, class: 'button first', method: :delete, data: { confirm: 'Estás seguro de eliminar el examen?' } %>
+        - <%= link_to 'Eliminar', quiz, class: 'button second', method: :delete, data: { confirm: 'Estás seguro de eliminar el examen?' } %>
       </li>
     <% end %>
   </ul>
 <% end %>
-
