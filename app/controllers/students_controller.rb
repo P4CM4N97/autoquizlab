@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :authenticate_student!
+  # before_action :authenticate_student!
   before_action :set_institution, only: [:edit, :update, :destroy]
 
   def index
@@ -9,7 +9,7 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
-    # @institution = Institution.find(current_student.institution_id)
+    @institution = Institution.find(current_student.institution_id)
   end
 
   def new
@@ -21,7 +21,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     @student.institution_id = params[:institution_id]
     if @student.save
-      redirect_to @student, notice: 'El estudiante se ha creado de manera exitosa.'
+      redirect_to @student.institution, notice: 'El estudiante se ha creado de manera exitosa.'
     else
       render :new
     end
@@ -42,7 +42,7 @@ class StudentsController < ApplicationController
 
   def destroy
     @student.destroy
-    redirect_to students_url, notice: 'Estudiante ha sido eliminado de manera exitosa.'
+    redirect_to @institution, notice: 'Estudiante ha sido eliminado de manera exitosa.'
   end
 
 

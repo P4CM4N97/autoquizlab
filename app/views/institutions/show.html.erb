@@ -69,6 +69,7 @@
                     <tr>
                       <td class="text-start" scope="row"><%= teacher.name %></td>
                       <td class="text-end" scope="row"><%= teacher.email %></td>
+                      <td class="text-end" scope="row"><%= link_to "Eliminar", teacher_path(teacher), data: {turbo_method: :delete, turbo_confirm: "Está seguro/a"}%></td>
                     </tr>
                   <% end %>
                 </tbody>
