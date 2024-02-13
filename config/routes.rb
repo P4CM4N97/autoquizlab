@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :students
   devise_for :teachers, controllers: {sessions: 'teachers/sessions'}
-  devise_for :institutions
+  devise_for :institutions, controllers: {sessions: 'institutions/sessions'}
 
 
   resources :institutions, only: [:new, :create, :show, :edit, :update, :destroy]

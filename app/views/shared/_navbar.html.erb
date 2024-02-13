@@ -33,7 +33,7 @@
           <% elsif teacher_signed_in? %>
             <li class="nav-item">
                 <%= link_to "Cerrar Sesion", destroy_teacher_session_path, class: "nav-link", data: {turbo_method: :delete} %>
-               <p class="nav-link" style="color:#2DA7A7">Maestro: <%= current_teacher.name %></p>
+               <p class="nav-link" style="color:#2DA7A7">Maestro: <%= link_to current_teacher.name, teacher_path(current_teacher.id) %></p>
 
 
             </li>
