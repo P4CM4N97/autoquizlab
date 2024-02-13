@@ -13,6 +13,7 @@
 <hr class="sin-color">
 
 
+
 <h1>Todos tus exámenes</h1>
 
   
@@ -42,4 +43,17 @@
       </div>
         </div>
           </div>
-       
+      
+<% if @quizzes.empty? %>
+  <p>No hay examenes disponibles.</p>
+<% else %>
+  <ul>
+    <% @quizzes.each do |quiz| %>
+      <li>
+        <%= link_to quiz.title, quiz %>
+        - <%= link_to 'Eliminar', quiz, class: 'button second', method: :delete, data: { confirm: 'Estás seguro de eliminar el examen?' } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
