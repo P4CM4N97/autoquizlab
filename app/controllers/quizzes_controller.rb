@@ -12,12 +12,24 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     @quiz.teacher = current_teacher
+    if @quiz.save
     @generated_content = @quiz.content
+    @generated_content = @generated_content.split("\n").reject {|element| element == ""}
+    @generated_content.each_with_index do |element,index|
+      if element.end_with?("?")
+        question = Question.new
+        question.question = element
+        question.quiz_id = @quiz.id
+        question.answers.push(@generated_content[index+1], @generated_content[index+2], @generated_content[index+3])        
+        question.save
+      end
+    end
+      redirect_to @quiz
+    end
   end
 
   def show
     @quiz = Quiz.find(params[:id])
-    @generated_content = @quiz.content
   end
 
   def edit
