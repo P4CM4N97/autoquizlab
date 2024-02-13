@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :take_quizzes, only: [:new, :create]
     end
 
-  resources :teachers, only: [:show] do
+  resources :teachers, only: [:show, :destroy] do
     resources :quizzes
   end
 
