@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :authenticate_teacher!
+  # before_action :authenticate_teacher!
   before_action :set_institution, only: [:new, :create]
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
 
@@ -19,26 +19,26 @@ class TeachersController < ApplicationController
   def create
     @teacher = @institution.teachers.new(teacher_params)
     if @teacher.save
-      redirect_to [@institution, @teacher], notice: 'El profesor se ha creado de manera exitosa.'
+      redirect_to @institution, notice: 'El profesor se ha creado de manera exitosa.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def update
-    if @teacher.update(teacher_params)
-      redirect_to [@institution, @teacher], notice: 'El profesor ha sido actualizado de manera exitosa.'
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   if @teacher.update(teacher_params)
+  #     redirect_to [@institution, @teacher], notice: 'El profesor ha sido actualizado de manera exitosa.'
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   def destroy
     @teacher.destroy
-    redirect_to institution_teachers_url(@institution), notice: 'El profesor ha sido eliminado de manera exitosa.'
+    redirect_to @teacher.institution, notice: 'El profesor ha sido eliminado de manera exitosa.'
   end
 
   private

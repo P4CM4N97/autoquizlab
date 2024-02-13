@@ -12,33 +12,7 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     @quiz.teacher = current_teacher
-    if @quiz.save
-create_question
-      if @quiz.save
-        @generated_content = @quiz.content
-        @generated = @generated_content.split("\n")
-        @generated.each do |line|
-          if line.start_with?(/(Pregunta||\d{1,5})/)
-            question = Question.new
-            question.question = line.strip
-          elsif line.start_with?("a") || line.start_with?("b") || line.start_with?("c")
-            question.answers << line
-          elsif line.start_with?("R:")
-            question.answer = line
-          end
-          # question.save if question+
-
-      @generated_content = @quiz.content
-      @generated = @generated_content.split("\n")
-  raise
-      (@quiz.number_of_questions - 1).times do | number |
-        question = Question.new(quiz_id: @quiz.id, question: @generated_content.split("\n").split("")[number + 1][0])
-        3.times do | option |
-          question.answers << @generated_content.split("\n").split("")[number + 1][option + 1]
-main
-        end
-      end
-    end        
+    @generated_content = @quiz.content
   end
 
   def show
