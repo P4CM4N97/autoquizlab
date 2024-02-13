@@ -12,7 +12,6 @@
   <hr class="sin-color">
   <hr class="sin-color">
   <hr class="sin-color">
-  <hr class="sin-color">
 
 <div class="container mt-4">
   <div class="grid">
@@ -21,57 +20,60 @@
     </svg>
     <div class="blur"></div>
   </div>
-
-  <h1 class="mt-4">Profesor: <%= @teacher.name %></h1>
-
-  <p>
+<div class="mt-4 text-light text-center">
+  <h1 >Profesor: <%= @teacher.name %></h1>
+  <p style="color:white;">
     <strong>Correo Electrónico:</strong> <%= @teacher.email %>
   </p>
+
   <hr class="sin-color">
-<div class="row justify-content-center">
+  <hr class="sin-color">
+</div>
+
+
+  <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card mt-4">
         <div class="card-body wow-bg" id="formBg">
-              <div class="col-md-3">
-                <h5 style="color:white;">Mi Materia:</h5>
-                <h5 style="color:white;"> <%= @teacher.subject.name %> </h5>
-              </div>
-
-          <div class="row justify-content-end">
-              <div class="col-md-5">
-                <h5 style="color:white;">Examenes</h5>
-                <table class="table table-dark">
-                  <thead class="text-start">
-                    <tr>
-                      <th scope="col">Crear Examen</th>
-                      <th scope="col"><%= link_to '+', new_teacher_quiz_path(@teacher), class: "btn btn-outline-light btn-md" %></th>
-                    </tr>
-                  </thead>
-                </table>
-              </div>
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="text-light text-center">Mi Materia:</h5>
+              <h5 class="text-light text-center"> <%= @teacher.subject.name %> </h5>
             </div>
 
+            <div class="col-md-6 text-center">
+              <h5 class="text-light">Examenes</h5>
+              <table class="table table-dark">
+                <thead class="text-start">
+                  <tr>
+                    <th scope="col">Crear Examen</th>
+                    <th scope="col"><%= link_to '+', new_teacher_quiz_path(@teacher), class: "btn btn-outline-light btn-md" %></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-  <div class="col-md-8">
-    <div class="card mt-4">
-      <div class="card-body wow-bg" id="formBg">
-          <h4>Alumnos</h4>
-          <table class="table table-dark">
+    <div class="col-md-8">
+      <div class="card mt-4">
+        <div class="card-body wow-bg" id="formBg">
+          <h4 class="text-center text-light">Alumnos</h4>
+          <table class="table table-bordered table-dark">
             <thead>
               <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Correo</th>
+                <th class="text-center" scope="col">Nombre</th>
+                <th class="text-center" scope="col">Correo</th>
                 <!-- <th scope="col">Acciones</th> -->
               </tr>
             </thead>
             <tbody>
               <% @students.each do |student| %>
                 <tr>
-                  <td><%= student.name %></td>
-                  <td><%= student.email %></td>
+                  <td class="text-light"><%= student.name %></td>
+                  <td class="text-light"><%= student.email %></td>
                   <!-- <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
                       <%= link_to 'Ver', student_path(student), class:"btn btn-outline-light btn-md" %>
@@ -88,7 +90,7 @@
     </div>
   </div>
 
-  <hr class="sin-color mt-4">
+  <hr class="sin-color">
 </div>
 
 <%#= link_to 'Editar', edit_teacher_path(@teacher), class: 'btn btn-outline-dark btn-lg' %>
