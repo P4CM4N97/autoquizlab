@@ -39,5 +39,6 @@ Rails.application.routes.draw do
 
   get 'quienes_somos', to: 'pages#quienes_somos'
   get 'preguntas_frecuentes', to: 'pages#preguntas_frecuentes'
+  get 'students_quiz_list', to: 'students#list'
 
 end
