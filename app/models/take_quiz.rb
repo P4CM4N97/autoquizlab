@@ -2,7 +2,6 @@
 class TakeQuiz < ApplicationRecord
   belongs_to :quiz
   belongs_to :student
-  has_many :answers, :questions, dependent: :destroy
 
   # Marca el quiz como iniciado y establece la primera pregunta
   def start!
