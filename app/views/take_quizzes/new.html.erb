@@ -1,0 +1,15 @@
+<%# app/views/take_quizzes/new.html.erb %>
+<h1>Seleccionar un Examen</h1>
+
+<%= form_with(url: take_quizzes_path, method: :post, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :quiz_id, 'Examen:' %>
+    <%= form.collection_select :quiz_id, Quiz.all, :id, :title, prompt: 'Selecciona un examen' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Empezar Examen', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to 'Volver', root_path, class: 'btn btn-secondary' %>

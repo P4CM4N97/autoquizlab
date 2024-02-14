@@ -3,42 +3,46 @@ class TakeQuizzesController < ApplicationController
   before_action :authenticate_student!
   before_action :set_take_quiz, only: [:show, :start, :answer]
 
-  # GET /take_quizzes/1
-  def show
-    # Si el quiz está completado, mostramos las preguntas y respuestas
-    if @take_quiz.completed?
-      @questions = @take_quiz.quiz.questions.includes(:answer)
-      @responses = @take_quiz.quiestion
-    end
-    # No es necesario hacer nada adicional aquí para empezar el examen, solo mostramos el botón en la vista.
+  # GET /take_quizzes/new
+  def new
+    @take_quiz = TakeQuiz.new
+    @quizzes = Quiz.all # Assuming you want to list all quizzes
   end
 
-  # POST /take_quizzes/1/start
-  def start
-    @take_quiz.start! # Aquí realmente iniciamos el quiz
-    redirect_to take_quiz_path(@take_quiz) # Redirigimos al usuario a la vista del quiz para empezar a responder preguntas.
-  end
+  # POST /take_quizzes
+  def create
+    @take_quiz = TakeQuiz.new(takequiz_params)
+    @take_quiz.student_id = current_student.id
 
-  # POST /take_quizzes/1/answer
-  def answer
-    # Aquí capturamos la respuesta seleccionada por el estudiante y la registramos
-    selected_answer = Answer.find(params[:answer_id])
-    @take_quiz.record_response!(selected_answer)
-
-    # Verificamos si todas las preguntas han sido respondidas para completar el quiz
-    if @take_quiz.all_questions_answered?
-      @take_quiz.complete!
-      redirect_to take_quiz_path(@take_quiz) # Redirigimos al usuario a la página de resultados
+    if @take_quiz.save
+      redirect_to take_quiz_path(@take_quiz) # Redirect to the quiz taking page
     else
-      @take_quiz.next_question! # Pasamos a la siguiente pregunta
-      redirect_to take_quiz_path(@take_quiz) # Redirigimos para mostrar la siguiente pregunta
+      render :new
     end
   end
+
+  # GET /take_quizzes/:id
+  def show
+    # If the quiz has not started, show the first question or instructions
+    unless @take_quiz.started?
+      @take_quiz.start!
+      @current_question = @take_quiz.current_question
+    end
+
+    # Load the current question and display it
+    @current_question = @take_quiz.current_question
+  end
+
+  # Add actions for 'start', 'answer' as necessary...
+  # ...
 
   private
 
   def set_take_quiz
     @take_quiz = TakeQuiz.find(params[:id])
-    redirect_to root_path, alert: 'No tienes permiso para visualizar este quiz.' unless @take_quiz.student == current_student
+  end
+
+  def takequiz_params
+    params.require(:take_quiz).permit(:quiz_id)
   end
 end
