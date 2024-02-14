@@ -2,7 +2,10 @@
 class TakeQuiz < ApplicationRecord
   belongs_to :quiz
   belongs_to :student
+
+
   has_many :responses, dependent: :destroy
+
 
   # Marks the quiz as started and sets the first question
   def start!
