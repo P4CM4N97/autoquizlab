@@ -21,6 +21,10 @@ class QuizzesController < ApplicationController
         question.question = element
         question.quiz_id = @quiz.id
         question.answers.push(@generated_content[index+1], @generated_content[index+2], @generated_content[index+3])        
+      
+        
+        binding.break
+        
         question.save
       end
     end
