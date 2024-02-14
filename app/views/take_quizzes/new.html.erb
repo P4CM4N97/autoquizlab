@@ -1,15 +1,12 @@
 <%# app/views/take_quizzes/new.html.erb %>
-<h1>Seleccionar un Examen</h1>
+<h1>Selecciona un examen para tomar</h1>
 
-<%= form_with(url: take_quizzes_path, method: :post, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :quiz_id, 'Examen:' %>
-    <%= form.collection_select :quiz_id, Quiz.all, :id, :title, prompt: 'Selecciona un examen' %>
-  </div>
+<%= form_with(model: @take_quiz, url: quiz_take_quizzes_path(@quiz), method: :post, local: true) do |form| %>
+  <%= form.hidden_field :quiz_id, value: @quiz.id %>
 
   <div class="actions">
     <%= form.submit 'Empezar Examen', class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<%= link_to 'Volver', root_path, class: 'btn btn-secondary' %>
+<%= link_to 'Volver', quizzes_path, class: 'btn btn-secondary' %>

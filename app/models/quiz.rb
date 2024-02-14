@@ -1,6 +1,7 @@
 class Quiz < ApplicationRecord
   belongs_to :teacher
   has_many :questions
+  has_many :take_quizzes, dependent: :destroy
 
   def content
     client = OpenAI::Client.new
