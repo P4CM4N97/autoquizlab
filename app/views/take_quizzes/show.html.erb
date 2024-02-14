@@ -1,48 +1,49 @@
 <%# app/views/take_quizzes/show.html.erb %>
 <% if @take_quiz.completed? %>
-  <h1>Resultados del quiz <%= @take_quiz.quiz.title %></h1>
-
+  <h1>Resultados del Quiz: <%= @take_quiz.quiz.title %></h1>
   <p>
     <strong>Estudiante:</strong>
     <%= @take_quiz.student.name %>
   </p>
-
   <p>
     <strong>Puntuación:</strong>
-    <%# placeholder para llamar el score del estudiante %>
-    <%= @take_quiz.calculate_score %>
+    <%= @take_quiz.result %>
   </p>
+
 
   <% @take_quiz.quiz.questions.each_with_index do |question, index| %>
     <div class="question">
       <p><%= question.content %></p>
       <p>Respuesta seleccionada:
-        <%# This assumes you have a method to get the selected answer's content %>
-        <%= @take_quiz.selected_answer_for(question)&.content %>
+        <%= @take_quiz.answers.find { |r| r.question_id == question.id }&.content %>
       </p>
       <p>Respuesta correcta: <%= question.answers.find(&:correct?).content %></p>
     </div>
   <% end %>
 
   <%= link_to 'Volver a los quizzes', quizzes_path %>
+
 <% else %>
   <h1><%= @take_quiz.quiz.title %></h1>
-  <p><strong>Descripción:</strong> <%= @take_quiz.quiz.description %></p>
+  <p><%= @take_quiz.quiz.description %></p>
 
+  <%# Check if the quiz has started %>
   <% if @take_quiz.started? %>
-    <% if @current_question %>
-      <h2><%= @current_question.content %></h2>
-      <%= form_with url: answer_take_quiz_path(@take_quiz), method: :post do |form| %>
-        <% @current_question.answers.each do |answer| %>
+    <%# Display the current question %>
+    <h2><%= @current_question.answer %></h2>
+
+    <%# Form to submit an answer %>
+    <%= form_with url: answer_take_quiz_path(@take_quiz), method: :post do |form| %>
+      <% @current_question.answers.each do |answer| %>
+        <div>
           <%= form.radio_button :answer_id, answer.id %>
-          <%= form.label :answer_id, answer.content, value: answer.id %><br>
-        <% end %>
-        <%= form.submit "Siguiente pregunta" %>
+          <%= label_tag :answer_id, answer.answer, value: answer.id %>
+        </div>
       <% end %>
-    <% else %>
-      <p>El quiz ha finalizado. Por favor, espera los resultados.</p>
+      <%= form.submit "Responder y siguiente pregunta" %>
     <% end %>
+
   <% else %>
-    <%= link_to 'Empezar Examen', start_take_quiz_path(@take_quiz), method: :post, class: 'btn btn-primary' %>
+    <%= link_to 'Empezar Quiz', start_take_quiz_path(@take_quiz), method: :post, class: 'btn btn-primary' %>
   <% end %>
 <% end %>
