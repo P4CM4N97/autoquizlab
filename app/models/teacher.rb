@@ -3,7 +3,7 @@ class Teacher < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :institution
   has_one :subject
-  has_many :student_subjects, through: :subjects
-  has_many :students, through: :subjects
+  has_many :student_subjects, through: :subject
+  has_many :students, through: :student_subjects
   has_many :quizzes
 end
