@@ -2,6 +2,7 @@
 class TakeQuiz < ApplicationRecord
   belongs_to :quiz
   belongs_to :student
+  # accepts_nested_attributes_for :quiz_answers
 
 
   has_many :responses, dependent: :destroy
