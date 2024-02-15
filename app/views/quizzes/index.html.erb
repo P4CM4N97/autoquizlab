@@ -1,17 +1,18 @@
-<h1>Todos tus exámenes</h1>
+<h2 class="text-warning">Exámenes: <%=@subject.name%></h2>
+<h4 class="text-warning">Maestro/a: <%= @subject.teacher.name %> </h4>
 
-<%= link_to 'Nuevo examen', new_quiz_path, class: 'button first' %>
+<%#= link_to 'Nuevo examen', new_quiz_path, class: 'button first' %>
 
 <% if @quizzes.empty? %>
   <p>No hay examenes disponibles.</p>
 <% else %>
   <ul>
-    <% @quizzes.each do |quiz| %>
+    <% @quizzes.each do |quiz| %> 
       <li>
-        <%= link_to quiz.title, quiz %>
-        - <%= link_to 'Eliminar', quiz, class: 'button first', method: :delete, data: { confirm: 'Estás seguro de eliminar el examen?' } %>
+        <%= quiz.title %> <%= link_to "Hacer exámen", "#" %>
       </li>
     <% end %>
   </ul>
 <% end %>
 
+<%= console %>

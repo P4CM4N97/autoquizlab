@@ -45,7 +45,7 @@
             <tbody>
               <% @student.subjects.each do |subject|  %>
                 <tr>
-                  <td class="text-start"><%= subject.name %></td>
+                  <td class="text-start"><%= subject.name %> <%= link_to "Ver Exámenes", quizzes_path(teacher_id: subject.teacher.id), class: "fs6 text-warning"%></td>
                 </tr>
               <% end %>
             </tbody>
