@@ -20,8 +20,13 @@ class QuizzesController < ApplicationController
         question = Question.new
         question.question = element
         question.quiz_id = @quiz.id
+
         question.answers.push(@generated_content[index+1], @generated_content[index+2], @generated_content[index+3])        
         question.answer = @generated_content[index+4].match(/[a-c]\)/)[0].delete(")")
+        question.answers.push(@generated_content[index+1], @generated_content[index+2], @generated_content[index+3])
+        question.answer = @generated_content[index+4].match(/[a-c]\)/)[0].delete(")")
+
+
         question.save
       end
     end

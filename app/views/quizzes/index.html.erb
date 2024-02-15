@@ -1,7 +1,49 @@
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+<hr class="sin-color">
+
+
+
 <h1>Todos tus exámenes</h1>
 
-<%= link_to 'Nuevo examen', new_quiz_path, class: 'button first' %>
-
+  
+<div class="col-md-4">
+  <div class="card mb-4">
+    <div class="card-body wow-bg" id="formBg">
+      <h4 class="text-center mb-4">Titulo del Quiz</h4>
+    </div>
+      <div class="text-center mb-4">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Quiz</th>
+              <div class="text-center mb-4">
+                <th class="text-end" scope="col"><%= link_to '+', new_quiz_path(@quiz), class: "btn btn-outline-light btn-md" %></th>
+              </div>
+            </tr>
+          </thead>
+            <tbody>
+              <% @quizzes.each do |quiz| %>
+               <tr>
+                 <td class="text-start" scope="row"><%= quiz.title %></td>
+               </tr>
+              <% end %>
+            </tbody>
+        </table>
+      </div>
+        </div>
+          </div>
+      
 <% if @quizzes.empty? %>
   <p>No hay examenes disponibles.</p>
 <% else %>
@@ -9,7 +51,7 @@
     <% @quizzes.each do |quiz| %>
       <li>
         <%= link_to quiz.title, quiz %>
-        - <%= link_to 'Eliminar', quiz, class: 'button first', method: :delete, data: { confirm: 'Estás seguro de eliminar el examen?' } %>
+        - <%= link_to 'Eliminar', quiz, class: 'button second', method: :delete, data: { confirm: 'Estás seguro de eliminar el examen?' } %>
       </li>
     <% end %>
   </ul>
