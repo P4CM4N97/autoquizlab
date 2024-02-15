@@ -5,9 +5,17 @@
   <hr class="sin-color">
   <hr class="sin-color">
   <hr class="sin-color">
+  <hr class="sin-color">
+
 
 <div class="container mt-4">
   <h1 class="text-center">Crear un Nuevo Examen</h1>
+
+     <div class="d-flex align-items-center justify-content-end">
+        <%= image_tag("logo_openai.png", width: 40, class: "mr-2") %>
+         <h6 style="color:#2c5f5f" class="mb-0">  Generado por OpenAI</h6>
+      </div>
+
   <hr class="sin-color mt-4">
 
   <div class="grid">
@@ -59,7 +67,7 @@
           <%= form.select :exam_level, options_for_select(['Principiante', 'Intermedio', 'Avanzado'], @quiz.exam_level), include_blank: true, class: 'form-select' %>
         </div>
       </div>
-      
+
         <hr class="sin-color mt-4">
 
         <div class="actions text-center">
