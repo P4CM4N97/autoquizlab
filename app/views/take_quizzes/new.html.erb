@@ -1,1 +1,13 @@
+<h1>Exámen: <%= @quiz.title %></h1>
 
+<%= form_with(model: @take_quiz, url: quiz_take_quizzes_path(@quiz), method: :post) do |form| %>
+  <% @questions.each_with_index do |question, index| %>
+    <p><%= question.question %></p>
+    <% question.answers.each do |answer| %>
+      <%= form.radio_button :answers, answer, name: "answers[#{question.id}]", id: "answers_#{question.id}_#{answer}" %>
+      <%= form.label "answers_#{question.id}_#{answer}", answer %><br>
+    <% end %>
+    <%= form.hidden_field :current_question_index, value: index %>
+  <% end %>
+  <%= form.submit "Submit" %>
+<% end %>
