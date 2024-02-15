@@ -7,10 +7,31 @@ class TakeQuizzesController < ApplicationController
 
   # GET /take_quizzes/new
   def new
+    @quiz = Quiz.find(params[:quiz_id])
     @take_quiz = TakeQuiz.new
-    # No need to find a quiz here since it's done in the create action from form submission
+    @questions = @quiz.questions
   end
 
+  def create
+    @quiz = Quiz.find(params[:quiz_id])
+    @take_quiz = TakeQuiz.new(take_quiz_params)
+    @take_quiz.quiz = @quiz
+    @take_quiz.student_id = current_student.id 
+    if @take_quiz.save
+      params[:answers].each do |question_id, response|
+        Answer.create(take_quiz: @take_quiz, question_id: question_id, response: response)
+      end
+      redirect_to root_path, notice: 'Quiz realizado'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def take_quiz_params
+    params.require(:take_quiz).permit(:current_question_index)
+  end
 #   # POST /take_quizzes
 #   def create
 #     @take_quiz = TakeQuiz.new(takequiz_params)

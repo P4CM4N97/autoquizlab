@@ -2,6 +2,7 @@
 class TakeQuiz < ApplicationRecord
   belongs_to :quiz
   belongs_to :student
+  has_many :answers
   # accepts_nested_attributes_for :quiz_answers
 
 
