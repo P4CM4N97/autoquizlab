@@ -3,4 +3,5 @@ class Teacher < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :institution
   has_one :subject
+  has_many :quizzes
 end

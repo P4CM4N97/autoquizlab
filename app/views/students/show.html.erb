@@ -61,11 +61,11 @@
               </tr>
             </thead>
             <tbody>
-              <%# @teachers.each do |teacher|  %>
+              <% @student.teachers.each do |teacher|  %>
                 <tr>
-                  <td class="text-center"><%#= teacher.name %></td>
+                  <td class="text-center"><%= teacher.name %></td>
                 </tr>
-              <%# end %>
+              <% end %>
             </tbody>
           </table>
         </div>

@@ -5,4 +5,5 @@ class Institution < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :teachers
   has_many :students
+  has_many :subjects
 end
