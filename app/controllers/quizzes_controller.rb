@@ -2,7 +2,8 @@ class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
 
   def index
-    @quizzes = Quiz.all
+    @quizzes = Quiz.where(teacher_id: params[:teacher_id])
+    @subject = Teacher.find(params[:teacher_id]).subject
   end
 
   def new

@@ -33,7 +33,30 @@
   <div class="card wow-bg mb-5">
     <div class="card-body" id="formBg">
 
+
+      <div class="row" >
+        <div class="col-md-4" >
+          <h4 style="color:white;" class="text-center">Materias</h4>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Nombre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @student.subjects.each do |subject|  %>
+                <tr>
+                  <td class="text-start"><%= subject.name %> <%= link_to "Ver Exámenes", quizzes_path(teacher_id: subject.teacher.id), class: "fs6 text-warning"%></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-4">
+
         <div class="col-md-12">
+
           <h4 style="color:white;" class="text-center">Profesores</h4>
           <table class="table table-dark">
             <thead>
