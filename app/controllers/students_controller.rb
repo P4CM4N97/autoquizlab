@@ -10,6 +10,7 @@ class StudentsController < ApplicationController
 
   def show
     @institution = Institution.find(current_student.institution_id)
+    @teachers = @institution.teachers
   end
 
   def new
@@ -45,6 +46,10 @@ class StudentsController < ApplicationController
     redirect_to @institution, status: :see_other, notice: 'Estudiante ha sido eliminado de manera exitosa.'
   end
 
+  def list
+    @materia = current_student.subjects.find_by(teacher_id: 23)
+    @quizzes = @materia.teacher.quizzes
+  end
 
   private
 

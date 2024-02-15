@@ -2,47 +2,51 @@
 class TakeQuiz < ApplicationRecord
   belongs_to :quiz
   belongs_to :student
-  has_many :answers, :questions, dependent: :destroy
 
-  # Marca el quiz como iniciado y establece la primera pregunta
+
+  has_many :responses, dependent: :destroy
+
+
+  # Marks the quiz as started and sets the first question
   def start!
-    update(started_at: Time.current, current_question_index: 0)
+    update!(started_at: Time.current, current_question_index: 0)
   end
 
-  # Avanza a la siguiente pregunta
+  # Advances to the next question
   def next_question!
-    update(current_question_index: current_question_index + 1)
+    update!(current_question_index: current_question_index + 1)
   end
 
-  # Verifica si el quiz ha sido iniciado
+  # Checks if the quiz has been started
   def started?
     started_at.present?
   end
 
-  # Recupera la pregunta actual basada en el índice
+  # Retrieves the current question based on the index
   def current_question
-    quiz.questions.order(:id)[current_question_index]
+    quiz.questions.order(:id)[current_question_index] if started?
   end
 
-  # Verifica si todas las preguntas han sido respondidas, indicando que el quiz está completo
+  # Checks if the quiz has been completed
   def completed?
-    current_question_index >= quiz.questions.count
+    completed_at.present? || current_question_index >= quiz.questions.count
   end
 
-  # # Registra la respuesta de un estudiante a una pregunta
-  # def record_response!(selected_answer)
-  #   responses.create!(question_id: current_question.id, answer_id: selected_answer.id)
-  # end
+  # Registers a student's response to a question
+  def record_response!(selected_answer)
+    responses.create!(question: current_question, answer: selected_answer)
+  end
 
-  # Marca el quiz como completado
+  # Marks the quiz as completed
   def complete!
-    update(completed_at: Time.current)
+    update!(completed_at: Time.current)
   end
 
-  # Calcula la puntuación basada en respuestas correctas (opcional)
-  # def calculate_score
-  #   correct_answers = responses.joins(:answer).where('answers.correct': true).count
-  #   # Esto asume que tu modelo Answer tiene un campo booleano `correct` que indica la respuesta correcta
-  #   correct_answers
-  # end
+  # Calculates the score based on correct answers (optional)
+  def calculate_score
+    correct_answers = responses.joins(:answer).where('answers.correct': true).count
+    # This assumes that your Answer model has a boolean `correct` field that indicates the correct answer
+    self.score = correct_answers # Add a score attribute to TakeQuiz model if you want to store the score
+    save!
+  end
 end

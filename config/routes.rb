@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   # nesteado para rutas de take_quizzes de un quiz
   # el alumno no puede borrar, editar o un quiz
   resources :quizzes do
-    resources :take_quizzes, only: [:new, :create]
+    resources :take_quizzes, only: [:new, :create, :show]
     end
 
   resources :teachers, only: [:show, :destroy] do
@@ -39,5 +39,18 @@ Rails.application.routes.draw do
 
   get 'quienes_somos', to: 'pages#quienes_somos'
   get 'preguntas_frecuentes', to: 'pages#preguntas_frecuentes'
+  get 'students_quiz_list', to: 'students#list'
 
+  resources :take_quizzes, only: [:new, :create, :show] do
+    member do
+      post :start
+      post :answer
+    end
+  end
+end
+
+
+Rails.application.routes.draw do
+  # ... other routes ...
+  # ... other routes ...
 end

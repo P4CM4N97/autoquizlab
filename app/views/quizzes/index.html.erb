@@ -1,8 +1,9 @@
+
 <h2 class="text-warning">Exámenes: <%=@subject.name%></h2>
 <h4 class="text-warning">Maestro/a: <%= @subject.teacher.name %> </h4>
 
-<%#= link_to 'Nuevo examen', new_quiz_path, class: 'button first' %>
 
+      
 <% if @quizzes.empty? %>
   <p>No hay examenes disponibles.</p>
 <% else %>
@@ -10,9 +11,9 @@
     <% @quizzes.each do |quiz| %> 
       <li>
         <%= quiz.title %> <%= link_to "Hacer exámen", "#" %>
+
       </li>
     <% end %>
   </ul>
 <% end %>
 
-<%= console %>

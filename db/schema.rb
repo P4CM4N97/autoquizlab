@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_09_024917) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_14_041023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_09_024917) do
     t.index ["teacher_id"], name: "index_quizzes_on_teacher_id"
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.bigint "take_quiz_id", null: false
+    t.bigint "question_id", null: false
+    t.bigint "answer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_responses_on_answer_id"
+    t.index ["question_id"], name: "index_responses_on_question_id"
+    t.index ["take_quiz_id"], name: "index_responses_on_take_quiz_id"
+  end
+
   create_table "student_subjects", force: :cascade do |t|
     t.bigint "student_id", null: false
     t.bigint "subject_id", null: false
@@ -115,6 +126,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_09_024917) do
     t.integer "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "started_at"
+    t.integer "current_question_index"
+    t.datetime "completed_at"
     t.index ["quiz_id"], name: "index_take_quizzes_on_quiz_id"
     t.index ["student_id"], name: "index_take_quizzes_on_student_id"
   end
@@ -137,6 +151,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_09_024917) do
   add_foreign_key "answers", "take_quizzes"
   add_foreign_key "questions", "quizzes"
   add_foreign_key "quizzes", "teachers"
+  add_foreign_key "responses", "answers"
+  add_foreign_key "responses", "questions"
+  add_foreign_key "responses", "take_quizzes"
   add_foreign_key "student_subjects", "students"
   add_foreign_key "student_subjects", "subjects"
   add_foreign_key "subjects", "institutions"
