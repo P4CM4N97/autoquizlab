@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1></h1>
 <h1></h1>
 <h1></h1>
@@ -32,15 +33,75 @@
 
 
 <h1>Exámen: <%= @quiz.title %></h1>
+=======
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
+  <hr class="sin-color">
 
-<%= form_with(model: @take_quiz, url: quiz_take_quizzes_path(@quiz), method: :post) do |form| %>
-  <% @questions.each_with_index do |question, index| %>
-    <p><%= question.question %></p>
-    <% question.answers.each do |answer| %>
-      <%= form.radio_button :answers, answer, name: "answers[#{question.id}]", id: "answers_#{question.id}_#{answer}" %>
-      <%= form.label "answers_#{question.id}_#{answer}", answer %><br>
+
+
+
+
+<div class="card mt-4 w-60">
+  <div class="card-body wow-bg" id="formBg">
+    <h1 class="text-light text-center"><%= @quiz.title %></h1>
+  </div>
+</div>
+
+    <div class="d-flex align-items-center justify-content-end">
+        <%= image_tag("logo_openai.png", width: 40, class: "mr-2") %>
+        <h6 style="color:#2c5f5f" class="mb-0">Generado por OpenAI</h6>
+      </div>
+  <hr class="sin-color">
+
+    <%= form_with(model: @take_quiz, url: quiz_take_quizzes_path(@quiz), method: :post) do |form| %>
+      <% @questions.each_with_index do |question, index| %>
+        <div class="card mt-4 w-70">
+          <div class="card-body wow-bg text-light" id="formBg">
+            <p><%= question.question %></p>
+            <ul class="ulno">
+              <% question.answers.each do |answer| %>
+                <li><%= form.radio_button :answers, answer, name: "answers[#{question.id}]", id: "answers_#{question.id}_#{answer}" %>
+                <%= form.label "answers_#{question.id}_#{answer}", answer %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <%= form.hidden_field :current_question_index, value: index %>
+      <% end %>
+  <hr class="sin-color">
+        <%= form.submit "Enviar", class: "btn btn-outline-light btn-md btn" %>
+
+>>>>>>> main
+
     <% end %>
-    <%= form.hidden_field :current_question_index, value: index %>
-  <% end %>
-  <%= form.submit "Submit" %>
-<% end %>
+  <hr class="sin-color">

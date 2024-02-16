@@ -1,9 +1,14 @@
 puts "Creando Instituciones"
 puts "--------------------------"
-Institution.destroy_all
+Answer.destroy_all
+TakeQuiz.destroy_all
+Question.destroy_all
+Quiz.destroy_all
+StudentSubject.destroy_all
+Subject.destroy_all
 Student.destroy_all
 Teacher.destroy_all
-Subject.destroy_all
+Institution.destroy_all
 
 hispano = Institution.create!(email: "hispano@gmail.com", password: "123456", name: "Hispano Americano de Leon", phone_number: "+1524777326424", address: "Blvd Vasco de Quiroga #235, Leon, Gto, Mexico")
 britanico = Institution.create!(email: "britanico@gmail.com", password: "123456", name: "Colegio Britanico", phone_number: "+1524777326425", address: "Av universidad #1235, Campestre, Leon, Guanajuato, Mexico")
