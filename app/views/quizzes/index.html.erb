@@ -1,19 +1,31 @@
+ <div class="grid">
+    <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
+      <!-- Tu contenido SVG aquí -->
+    </svg>
+    <div class="blur"></div>
+  </div>
 
-<h2 class="text-warning">Exámenes: <%=@subject.name%></h2>
-<h4 class="text-warning">Maestro/a: <%= @subject.teacher.name %> </h4>
+<div class="card mt-4 w-70">
+  <div class="card-body wow-bg" id="formBg">
+<h2 class="text-light">Exámenes: <%=@subject.name%></h2>
+<h6 class="text-light">Maestro/a: <%= @subject.teacher.name %> </h4>
+ </div>
+</div>
 
 
-      
+<div class="card mt-4 w-70">
+  <div class="card-body wow-bg" id="formBg">
 <% if @quizzes.empty? %>
-  <p>No hay examenes disponibles.</p>
+  <p class="text-light">No hay examenes disponibles.</p>
 <% else %>
-  <ul>
-    <% @quizzes.each do |quiz| %> 
+  <ul class="text-light">
+    <% @quizzes.each do |quiz| %>
       <li>
-        <%= quiz.title %> <%= link_to "Hacer exámen", new_quiz_take_quiz_path(quiz) %>
+        <%= quiz.title %> <%= link_to "Hacer exámen", new_quiz_take_quiz_path(quiz), class:"btn btn-outline-light btn-sm" %>
 
       </li>
     <% end %>
   </ul>
 <% end %>
-
+ </div>
+</div>

@@ -30,6 +30,9 @@ body {
   // overflow: hidden;
 }
 
+.ulno {
+  list-style-type: none;
+}
 
 .menu:hover {
   color: var(--text);

@@ -1,3 +1,10 @@
+  <div class="grid">
+    <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
+      <!-- Tu contenido SVG aquí -->
+    </svg>
+    <div class="blur"></div>
+  </div>
+
 <div class="container mt-4">
   <h1>Crear un Nuevo Maestro</h1>
   <hr class="sin-color">
@@ -27,7 +34,7 @@
       </div>
       <hr class="sin-color">
             <div class="form-actions text-center">
-              <button type="submit" class="btn btn-outline-light btn-md">Registrar Maestro</button>
+              <%= f.submit "Registrar", class:"btn btn-outline-light btn-md" %>
             </div>
           <% end %>
 
