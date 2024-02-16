@@ -23,9 +23,9 @@ class QuizzesController < ApplicationController
         question.quiz_id = @quiz.id
 
         question.answers.push(@generated_content[index+1], @generated_content[index+2], @generated_content[index+3])        
-        question.answer = @generated_content[index+4].match(/[a-c]\)/)[0].delete(")")
+        question.answer = @generated_content[index+4]
         question.answers.push(@generated_content[index+1], @generated_content[index+2], @generated_content[index+3])
-        question.answer = @generated_content[index+4].match(/[a-c]\)/)[0].delete(")")
+        question.answer = @generated_content[index+4]
 
 
         question.save
