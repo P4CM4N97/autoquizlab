@@ -21,7 +21,7 @@ class TakeQuizzesController < ApplicationController
       params[:answers].each do |question_id, response|
         Answer.create(take_quiz: @take_quiz, question_id: question_id, response: response)
       end
-      redirect_to root_path, notice: 'Quiz realizado'
+      redirect_to student_path(@take_quiz.student_id), notice: 'Quiz realizado'
     else
       render :new, status: :unprocessable_entity
     end
