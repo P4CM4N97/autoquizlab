@@ -27,7 +27,7 @@ class QuizzesController < ApplicationController
         question.answers.push(@generated_content[index+1], @generated_content[index+2], @generated_content[index+3])
         question.answer = @generated_content[index+4]
 
-
+        question.answers = question.answers.uniq
         question.save
       end
     end
@@ -37,6 +37,7 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+    @questions = Question.where(quiz_id: @quiz.id).uniq
   end
 
   def edit
